@@ -21,6 +21,31 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            position: relative;
+        }
+
+        /* Clock and Calendar styles */
+        .time-calendar {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: rgb(255, 255, 255); /* White text */
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 1rem;
+            text-align: left;
+        }
+
+        .time-calendar .time {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: rgb(0, 255, 255); /* Cyan color for the time */
+        }
+
+        .time-calendar .date {
+            font-size: 1rem;
+            color: rgb(255, 215, 0); /* Gold color for the date */
         }
 
         .container {
@@ -74,19 +99,99 @@
         footer a:hover {
             text-decoration: underline;
         }
+
+        /* Search bar styles */
+        .search-container {
+            margin-top: 20px;
+        }
+
+        .search-container input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid #ff6f61;
+            font-size: 1rem;
+            width: 300px;
+            margin-right: 10px;
+        }
+
+        .search-container button {
+            background-color: #ff6f61;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .search-container button:hover {
+            transform: scale(1.1);
+            background-color: #ff4b3e;
+        }
     </style>
 </head>
 <body>
+    <!-- Clock and Calendar -->
+    <div class="time-calendar" id="time-calendar">
+        <div class="time" id="clock"></div>
+        <div class="date" id="date"></div>
+    </div>
+
     <div class="container">
-        <h1>Selamat Datang di Dunia Anime</h1>
+        <h1><mark>KAYNIMENIM</mark></h1>
         <p>Pengen baca manga tapi gatau caranya, disini aja bre gw sedia in beberapa web buat baca manga dan nonton anime.</p>
-        <li> <a href="https://komiku.id/" class="btn">komiku</a> </li>
-        <li> <a href="https://samehadaku.email/" class="btn">samehadaku</a> </li>
-        <li> <a href="https://assets.onecompiler.app/432h6q42s/432hdn5f7/images%20(13).jpeg" class="btn">nekopoi</a> </li>
-          </ul>
+        <ul>
+            <li> <a href="https://komiku.id/" class="btn">komiku</a> </li>
+            <li> <a href="https://samehadaku.email/" class="btn">samehadaku</a> </li>
+            <li> <a href="https://assets.onecompiler.app/432h6q42s/432hdn5f7/images%20(13).jpeg" class="btn">nekopoi🔞</a> </li>
+            <li> <a href="https://kuronime.biz/" class="btn">kuronime</a> </li>
+        </ul>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search for anime or manga...">
+            <button onclick="search()">Search</button>
+        </div>
+
         <footer>
-            <p>Dibuat oleh <a href="https://wa.me/+6283846635348">piki gntg:v </a> </p>
+            <p>Dibuat oleh <a href="https://whatsapp.com/dl/">Piki Gntg:v </a></p>
         </footer>
     </div>
+
+    <script>
+        // Function to update the clock and date
+        function updateTimeAndDate() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            const timeString = `${hours}:${minutes}:${seconds}`;
+
+            const day = now.getDate().toString().padStart(2, '0');
+            const month = (now.getMonth() + 1).toString().padStart(2, '0');
+            const year = now.getFullYear();
+            const dateString = `${day}/${month}/${year}`;
+
+            // Update the clock and date
+            document.getElementById("clock").textContent = timeString;
+            document.getElementById("date").textContent = dateString;
+        }
+
+        // Update the time every second
+        setInterval(updateTimeAndDate, 1000);
+
+        // Initial call to set the time and date
+        updateTimeAndDate();
+
+        // Search function to redirect
+        function search() {
+            const query = document.getElementById("search-input").value;
+            if (query) {
+                const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+                window.location.href = searchUrl;
+            }
+        }
+    </script>
 </body>
 </html>
